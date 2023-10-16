@@ -5,10 +5,10 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 
 defineProps({
   Operation: {
-    type: Object,
+    type: Function,
   },
   AddNumber: {
-    type: Object,
+    type: Function,
   }
 })
 

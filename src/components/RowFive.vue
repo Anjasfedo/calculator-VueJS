@@ -13,15 +13,6 @@ defineProps({
   DoOperation: {
     type: Function,
   },
-  firstNumber: {
-    type: Array,
-  },
-  secondNumber: {
-    type: Array,
-  },
-  operations: {
-    type: String,
-  }
 
 })
 
@@ -42,7 +33,7 @@ const icons = {
     <button class='bg-pink-400 rounded-full w-20 h-20 flex items-center justify-center relative'>
       <font-awesome-icon :icon="icons.faCircle" size="2xs" class="absolute bottom-7"/>
     </button>
-    <button @click="DoOperation(firstNumber, secondNumber, operations)" class='bg-pink-400 rounded-full w-20 h-20 flex items-center justify-center'>
+    <button @click="DoOperation()" class='bg-pink-400 rounded-full w-20 h-20 flex items-center justify-center'>
       <font-awesome-icon :icon="icons.faEquals" />
     </button>
   </div>
