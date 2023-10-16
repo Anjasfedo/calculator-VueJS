@@ -9,13 +9,9 @@ import RowThree from './components/RowThree.vue';
 import RowFour from './components/RowFour.vue';
 import RowFive from './components/RowFive.vue';
 
-import { ref, computed, watch   } from 'vue';
-
-const numbers = ref(0)
+import { ref, watch   } from 'vue';
 
 const input = ref([])
-
-const operations = ref('')
 
 const AddNumber = (num) => {
   input.value.push(num)
@@ -25,10 +21,8 @@ const Operation = (opt) => {
   updateComputedResult();
   const previousChar = input.value[input.value.length - 1];
   if (!isNaN(previousChar)) {
-    // Jika operator sebelumnya adalah angka, maka tambahkan operator
     input.value.push(opt);
   } else {
-    // Operator sebelumnya bukan angka, mungkin Anda ingin menangani kasus ini.
     console.error(false);
   }
   
@@ -42,7 +36,6 @@ const updateComputedResult = () => {
 
 const DoOperation = () => {
   updateComputedResult();
-  // Do something with the computed result, e.g., display or save it
   console.log('Hasil operasi:', computedResult.value);
 };
 
@@ -121,7 +114,6 @@ watch(input, () => {
       {{ input }}
       {{ computedResult }}
 
-      
     <ShowNumberVue v-bind:result="computedResult" />
       <div class='flex gap-3 flex-col'>
       <RowOne v-bind:AddNumber="AddNumber" v-bind:Operation="Operation" />
