@@ -26,16 +26,8 @@ const Operation = (opt) => {
   }
 }
 
-const inputToString = computed(() => {
-  return eval(input.value.join(''))
-})
-
 const DoOperation = () => {
-  try {
-    result.value = eval(input.value.join(''));
-  } catch (error) {
-    console.error(error);
-  }
+  result.value = eval(input.value.join(''));
 };
 
 </script>
