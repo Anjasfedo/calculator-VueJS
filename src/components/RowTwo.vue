@@ -32,7 +32,7 @@ const icons = {
     <button @click="AddNumber(9)" class='bg-pink-400 rounded-full w-20 h-20 flex items-center justify-center'>
       <font-awesome-icon :icon="icons.fa9" />
     </button>
-    <button @click="Operation('x')" class='bg-pink-400 rounded-full w-20 h-20 flex items-center justify-center'>
+    <button @click="Operation('*')" class='bg-pink-400 rounded-full w-20 h-20 flex items-center justify-center'>
       <font-awesome-icon :icon="icons.faXmark" />
     </button>
   </div>

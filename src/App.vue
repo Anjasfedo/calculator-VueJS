@@ -2,105 +2,41 @@
 import ShowNumberVue from './components/ShowNumber.vue';
 
 import RowOne from './components/RowOne.vue';
-
 import RowTwo from './components/RowTwo.vue';
-
 import RowThree from './components/RowThree.vue';
 import RowFour from './components/RowFour.vue';
 import RowFive from './components/RowFive.vue';
 
-import { ref, watch   } from 'vue';
+import { ref, computed } from 'vue';
 
 const input = ref([])
+
+const result = ref(0)
 
 const AddNumber = (num) => {
   input.value.push(num)
 };
 
 const Operation = (opt) => {
-  updateComputedResult();
   const previousChar = input.value[input.value.length - 1];
   if (!isNaN(previousChar)) {
     input.value.push(opt);
   } else {
     console.error(false);
   }
-  
 }
 
-const computedResult = ref(0);
-
-const updateComputedResult = () => {
-  computedResult.value = evaluateExpression(input.value);
-};
+const inputToString = computed(() => {
+  return eval(input.value.join(''))
+})
 
 const DoOperation = () => {
-  updateComputedResult();
-  console.log('Hasil operasi:', computedResult.value);
-};
-
-const evaluateExpression = (expression) => {
-  let numStack = [];
-  let opStack = [];
-  let num = 0;
-
-  for (const token of expression) {
-    if (!isNaN(token)) {
-      num = num * 10 + token;
-    } else if (['+', '-', 'x', '/'].includes(token)) {
-      numStack.push(num);
-      num = 0;
-
-      while (
-        opStack.length > 0 &&
-        precedence(opStack[opStack.length - 1]) >= precedence(token)
-      ) {
-        numStack.push(
-          performOperation(opStack.pop(), numStack.pop(), numStack.pop())
-        );
-      }
-
-      opStack.push(token);
-    }
-  }
-
-  numStack.push(num);
-
-  while (opStack.length > 0) {
-    numStack.push(
-      performOperation(opStack.pop(), numStack.pop(), numStack.pop())
-    );
-  }
-
-  return numStack[0];
-};
-
-const precedence = (operator) => {
-  if (operator === 'x' || operator === '/') {
-    return 2;
-  }
-  if (operator === '+' || operator === '-') {
-    return 1;
-  }
-  return 0;
-};
-
-const performOperation = (operator, b, a) => {
-  switch (operator) {
-    case '+':
-      return a + b;
-    case '-':
-      return a - b;
-    case 'x':
-      return a * b;
-    case '/':
-      return a / b;
+  try {
+    result.value = eval(input.value.join(''));
+  } catch (error) {
+    console.error(error);
   }
 };
-
-watch(input, () => {
-  updateComputedResult();
-});
 
 </script>
 
@@ -112,9 +48,12 @@ watch(input, () => {
   <main class="flex flex-col items-center justify-center m-8">
     <div class=' border-2 border-rose-500'>
       {{ input }}
-      {{ computedResult }}
 
-    <ShowNumberVue v-bind:result="computedResult" />
+      {{ input.join('') }}
+
+      {{ inputToString }}
+
+    <ShowNumberVue :result="result"/>
       <div class='flex gap-3 flex-col'>
       <RowOne v-bind:AddNumber="AddNumber" v-bind:Operation="Operation" />
       <RowTwo v-bind:AddNumber="AddNumber" v-bind:Operation="Operation" />
