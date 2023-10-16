@@ -31,11 +31,7 @@ const inputToString = computed(() => {
 })
 
 const DoOperation = () => {
-  try {
-    result.value = eval(input.value.join(''));
-  } catch (error) {
-    console.error(error);
-  }
+  result.value = eval(input.value.join(''));
 };
 
 </script>
