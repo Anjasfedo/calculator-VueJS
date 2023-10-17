@@ -15,6 +15,7 @@ const result = ref(0)
 
 const AddNumber = (num) => {
   input.value.push(num)
+  result.value = eval(input.value.join(''));
 };
 
 const Operation = (opt) => {
@@ -30,6 +31,10 @@ const DoOperation = () => {
   result.value = eval(input.value.join(''));
 };
 
+const inputJoin = computed(() => {
+  return input.value.join('')
+})
+
 </script>
 
 <template>
@@ -41,11 +46,11 @@ const DoOperation = () => {
     <div class=' border-2 border-rose-500'>
       {{ input }}
 
-      {{ input.join('') }}
+      {{ inputJoin }}
 
-      {{ inputToString }}
+      {{ result }}
 
-    <ShowNumberVue :result="result"/>
+    <ShowNumberVue :result="result" :inputJoin="inputJoin"/>
       <div class='flex gap-3 flex-col'>
       <RowOne v-bind:AddNumber="AddNumber" v-bind:Operation="Operation" />
       <RowTwo v-bind:AddNumber="AddNumber" v-bind:Operation="Operation" />
