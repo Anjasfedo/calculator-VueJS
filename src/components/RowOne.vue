@@ -9,6 +9,9 @@ defineProps({
   },
   AddNumber: {
     type: Function,
+  },
+  clears: {
+    type: Function,
   }
 })
 
@@ -24,7 +27,7 @@ const icons = {
 
 <template lang="html">
   <div class="flex flex-row justify-between w-full gap-2">
-    <button class='bg-pink-400 rounded-full w-20 h-20 flex items-center justify-center'>
+    <button @click="clears" class='bg-pink-400 rounded-full w-20 h-20 flex items-center justify-center'>
       <font-awesome-icon :icon="icons.faA" />
       <font-awesome-icon :icon="icons.faC" />
     </button>
